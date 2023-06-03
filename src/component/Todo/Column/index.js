@@ -38,13 +38,29 @@ const Column = ({ state }) => {
       }}
     >
       <div className="flex justify-between">
-        <p>{state}</p>
+        <p className="text-[16px] font-semibold">{state}</p>
         <button onClick={() => setOpen(true)}>Add</button>
       </div>
       <div className="h-[500px] overflow-auto flex flex-col gap-2">
-        {tasks.map((task) => (
-          <Task title={task.title} key={task.title} />
-        ))}
+        {tasks && tasks.length > 0 ? (
+          tasks.map((task) => <Task title={task.title} key={task.title} />)
+        ) : (
+          <div className="flex justify-center items-center">
+            <div className="flex flex-col gap-[8px]">
+              <img
+                src="./images/robot.gif"
+                alt="empty"
+                className="w-[200px] h-[200px] object-cover "
+              />
+              <div>
+                <p>You don&apos;t have task in {state}</p>
+                <p className="text-center hover:underline-offset-2 text-blue-500 hover:underline cursor-pointer">
+                  + Add
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       {open && (
         <div className="absolute inset-0 flex justify-center items-center bg-opacity-30 bg-gray-950">

@@ -6,10 +6,10 @@ const store = (set) => ({
   tasks: [],
   draggedTask: null,
   tasksInOngoing: 0,
-  addTask: (title, state) =>
+  addTask: (title, content, state) =>
     set(
       produce((store) => {
-        store.tasks.push({ title, state });
+        store.tasks.push({ title, content, state });
       }),
       //(store) => ({ tasks: [...store.tasks, { title, state }] }),
       false,
@@ -19,11 +19,11 @@ const store = (set) => ({
     set((store) => ({
       tasks: store.tasks.filter((task) => task.title !== title),
     })),
-  setDraggedTask: (title) => set({ draggedTask: title }),
-  moveTask: (title, state) =>
+  setDraggedTask: (title, content) => set({ draggedTask: { title, content } }),
+  moveTask: (title, state, content) =>
     set((store) => ({
       tasks: store.tasks.map((task) =>
-        task.title === title ? { title, state } : task
+        task.title === title ? { title, content, state } : task
       ),
     })),
 });

@@ -53,7 +53,7 @@ const Header = () => {
         </button>
       </div>
       {isOpen && (
-        <nav className="mt-4">
+        <nav className="mt-4 md:hidden">
           <ul className="flex flex-col items-center">
             <li className="mb-2">
               <a
@@ -65,22 +65,9 @@ const Header = () => {
               </a>
             </li>
             <li className="mb-2">
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white"
-                onClick={toggleMenu}
-              >
-                Posts
-              </a>
-            </li>
-            <li className="mb-2">
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white"
-                onClick={toggleMenu}
-              >
-                Users
-              </a>
+              <span className="cursor-pointer" onClick={handleLogout}>
+                Logout
+              </span>
             </li>
           </ul>
         </nav>

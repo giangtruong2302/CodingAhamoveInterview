@@ -9,6 +9,7 @@ const Column = ({ state }) => {
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
   const [drop, setDrop] = useState(false);
+  const [duplicateTitle, setDuplicateTitle] = useState(false); // Thêm biến cờ duplicateTitle
 
   const tasks = useStore(
     (store) => store.tasks.filter((task) => task.state === state),
@@ -18,10 +19,27 @@ const Column = ({ state }) => {
   const setDraggedTask = useStore((store) => store.setDraggedTask);
   const draggedTask = useStore((store) => store.draggedTask);
   const moveTask = useStore((store) => store.moveTask);
+  const handleAddTask = () => {
+    // Kiểm tra xem task với title đã tồn tại chưa
+    const taskExists = tasks.some((task) => task.title === text);
+    console.log(taskExists);
+    if (taskExists) {
+      setDuplicateTitle(true); // Thiết lập cờ duplicateTitle thành true nếu title đã tồn tại
+      alert("Task bạn đang tạo đã tồn tại");
+      return;
+    }
+
+    // Nếu không có task nào với title đã cho, thêm task mới
+    addTask(text, content, state);
+    setText("");
+    setContent("");
+    setOpen(false);
+    setDuplicateTitle(false); // Thiết lập cờ duplicateTitle thành false khi thêm task thành công
+  };
   return (
     <div
       className={classNames(
-        "bg-[#e9ecef] shadow border-[1px] border-solid border-transparent min-h-[320px] w-full max-w-[320px] rounded-[8px] flex flex-col gap-3 px-4 py-4",
+        "bg-[#e9ecef] shadow border-[1px] border-solid border-transparent h-fit md:min-h-[320px] w-full max-w-[320px] rounded-[8px] flex flex-col gap-3 px-4 py-4",
         { "drop border-color-white": drop }
       )}
       onDragOver={(e) => {
@@ -38,7 +56,7 @@ const Column = ({ state }) => {
         setDraggedTask(null);
       }}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-col md:flex-row">
         <p className="text-[16px] font-semibold">{state}</p>
         <button
           className="px-6 py-2 rounded-[8px] bg-gray-900 text-white font-bold flex gap-2"
@@ -88,20 +106,20 @@ const Column = ({ state }) => {
               className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
               onChange={(e) => setContent(e.target.value)}
               value={content}
-              placeholder="what are you doing today ?"
+              placeholder="tell me more your task ?"
               required
               cols={3}
               rows={4}
             />
             <div className="flex justify-end">
               <button
-                className="px-4 py-2 mr-2 bg-gray-300 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:ring-blue-400"
-                onClick={() => {
-                  addTask(text, content, state);
-                  setText("");
-                  setContent("");
-                  setOpen(false);
-                }}
+                className={`px-4 py-2 mr-2  rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:ring-blue-400 ${
+                  text === "" || content === ""
+                    ? "cursor-not-allowed bg-gray-300"
+                    : "bg-blue-400 text-white"
+                }`}
+                disabled={text === "" || content === "" ? true : false}
+                onClick={handleAddTask}
               >
                 Submit
               </button>

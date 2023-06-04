@@ -15,9 +15,11 @@ const store = (set) => ({
       false,
       "addTask"
     ),
-  deleteTask: (title) =>
+  deleteTask: (title, state) =>
     set((store) => ({
-      tasks: store.tasks.filter((task) => task.title !== title),
+      tasks: store.tasks.filter(
+        (task) => task.title !== title || task.state !== state
+      ),
     })),
   setDraggedTask: (title, content) => set({ draggedTask: { title, content } }),
   moveTask: (title, state, content) =>

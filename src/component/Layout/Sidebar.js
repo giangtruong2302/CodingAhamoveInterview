@@ -13,7 +13,10 @@ const Sidebar = () => {
       </div>
       <ul className="p-4 flex flex-col gap-4">
         <li className="mb-2">
-          <a href="#" className="text-gray-800 hover:text-gray-600">
+          <a
+            href="#"
+            className="text-gray-800 hover:text-gray-600 hover:underline-offset-2 hover:underline"
+          >
             Dashboard
           </a>
         </li>

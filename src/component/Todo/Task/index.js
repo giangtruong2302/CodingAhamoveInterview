@@ -58,7 +58,10 @@ const Task = ({ title, content, key }) => {
         </div>
       )} */}
       <div className="flex justify-between mt-3">
-        <div onClick={() => deleteTask(task.title)} className="cursor-pointer">
+        <div
+          onClick={() => deleteTask(task.title, task.state)}
+          className="cursor-pointer"
+        >
           <img
             src={"/icons/trash-2.svg"}
             alt={task.title}

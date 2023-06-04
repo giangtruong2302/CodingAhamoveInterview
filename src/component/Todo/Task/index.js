@@ -20,7 +20,7 @@ const Task = ({ title, content, key }) => {
           ? "bg-gray-400"
           : task.state === "Work in process"
           ? "bg-blue-400"
-          : task.state === "Re-work"
+          : task.state === "Unfinished work"
           ? "bg-red-400"
           : "bg-green-700"
       } rounded-[4px] h-fit p-[8px] text-[#fff] cursor-move flex flex-col gap-2 justify-between`}

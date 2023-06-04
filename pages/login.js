@@ -16,7 +16,12 @@ const Login = () => {
     }
     const authData = JSON.parse(localStorage.getItem("user"));
     if (username === authData.username && password === authData.password) {
+      const isLogout = false;
       setIsLoadingLogin(false);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username, password, isLogout })
+      );
       router.push("/");
     } else {
       alert("Invalid credentials");

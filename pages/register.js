@@ -5,10 +5,14 @@ import React, { useState } from "react";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogout, setIsLogout] = useState(false);
   const router = useRouter();
   const handleRegistation = () => {
     if (username !== "" && password !== "") {
-      localStorage.setItem("user", JSON.stringify({ username, password }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username, password, isLogout })
+      );
       router.push("/login");
     } else {
       alert("Invalid credentials");

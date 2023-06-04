@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [displayName, setDisplayName] = useState("");
+  const router = useRouter();
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem("user"));
     if (authData && authData.username) {
@@ -10,10 +12,16 @@ const Header = () => {
     }
   }, []);
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    if (!localStorage.getItem("user")) {
-      router.push("/login");
-    }
+    const authData = JSON.parse(localStorage.getItem("user"));
+    if (!authData) return;
+    const username = authData.username;
+    const password = authData.password;
+    const isLogout = true;
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ username, password, isLogout })
+    );
+    router.push("/login");
   };
   const toggleMenu = () => {
     setIsOpen(!isOpen);

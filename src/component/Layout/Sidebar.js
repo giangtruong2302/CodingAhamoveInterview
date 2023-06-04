@@ -17,16 +17,6 @@ const Sidebar = () => {
             Dashboard
           </a>
         </li>
-        <li className="mb-2">
-          <a href="#" className="text-gray-800 hover:text-gray-600">
-            Posts
-          </a>
-        </li>
-        <li className="mb-2">
-          <a href="#" className="text-gray-800 hover:text-gray-600">
-            Users
-          </a>
-        </li>
       </ul>
     </aside>
   );

@@ -10,6 +10,10 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
+      router.push("/register");
+    }
+    const authData = JSON.parse(localStorage.getItem("user"));
+    if (authData.isLogout) {
       router.push("/login");
     }
   }, [router]);

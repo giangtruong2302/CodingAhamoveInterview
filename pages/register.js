@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLogout, setIsLogout] = useState(false);
+  useEffect(() => {
+    if (typeof window !== undefined && !localStorage.getItem("user")) {
+      router.push("/");
+    }
+  }, []);
   const router = useRouter();
   const handleRegistation = () => {
     if (username !== "" && password !== "") {

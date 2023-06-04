@@ -5,18 +5,20 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Todo from "../src/component/Todo";
 import Layout from "../src/component/Layout";
-
+import Register from "./register";
 export default function Home() {
   const router = useRouter();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       router.push("/register");
+      return;
     }
     const authData = JSON.parse(localStorage.getItem("user"));
     if (authData.isLogout) {
       router.push("/login");
     }
   }, [router]);
+
   return (
     <div>
       <Head>
@@ -25,9 +27,13 @@ export default function Home() {
         <link rel="icon" href="./icons/BrandingLogomoi-01.png" />
       </Head>
 
-      <Layout>
-        <Todo />
-      </Layout>
+      {typeof window !== "undefined" && localStorage.getItem("user") ? (
+        <Layout>
+          <Todo />
+        </Layout>
+      ) : (
+        <Register />
+      )}
     </div>
   );
 }

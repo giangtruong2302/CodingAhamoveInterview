@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -58,14 +59,6 @@ const Register = () => {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -84,7 +77,7 @@ const Register = () => {
             <div>
               <button
                 onClick={handleRegistation}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
@@ -92,13 +85,13 @@ const Register = () => {
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            You do not account &nbsp;
-            <a
-              href="#"
+            You have an account &nbsp;
+            <Link
+              href="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Create one ?
-            </a>
+              Login ?
+            </Link>
           </p>
         </div>
       </div>
